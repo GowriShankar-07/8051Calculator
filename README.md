@@ -2,12 +2,13 @@
 
 A fully functional scientific calculator built on the **8051 microcontroller (AT89C51)**, featuring arithmetic operations, trigonometric functions, and exponentiation — all implemented in Embedded C with a 4×4 matrix keypad and 16×2 LCD interface.
 
-
 ---
 
 ## Hardware Demo
 
-![8051 Calculator Hardware](assets/hardware.jpg)
+![8051 Calculator Hardware](hardware.jpg)
+
+[Youtube link](https://youtu.be/oUOGsNmhVVI)
 
 *The working calculator on a Microcontroller Trainer Kit with 4×4 keypad and 16×2 LCD*
 
@@ -45,24 +46,6 @@ A fully functional scientific calculator built on the **8051 microcontroller (AT
 - Division by zero → displays `ERROR`
 - Undefined trig results (tan 90°, cot 0°) → displays `INF`
 - Continuous calculation: result of one operation becomes first operand of the next
-
----
-
-## Project Structure
-
-```
-├── src/
-│   └── calculator.c           # Complete Embedded C source (main + all modules)
-├── simulation/
-│   └── calculator.pdsprj      # Proteus simulation project file
-│   └── simulation_demo.png    # Screenshot of Proteus simulation
-├── assets/
-│   └── hardware.jpg           # Photo of physical hardware
-│   └── circuit_diagram.png    # Schematic from Proteus
-├── docs/
-│   └── project_report.pdf     # Full project report
-└── README.md
-```
 
 ---
 
@@ -128,7 +111,7 @@ A fully functional scientific calculator built on the **8051 microcontroller (AT
 
 The full circuit was designed and verified in **Proteus Design Suite** before hardware implementation.
 
-![Proteus Simulation](simulation/simulation_demo.png)
+![Proteus Simulation](schematic.jpg)
 
 The simulation includes:
 - AT89C51 microcontroller with 11.0592 MHz crystal
@@ -154,7 +137,7 @@ The simulation includes:
 ## How to Run
 
 ### Simulation (Proteus)
-1. Open `simulation/calculator.pdsprj` in Proteus Design Suite
+1. Open `Calculator8051.pdsprj` in Proteus Design Suite
 2. Compile `src/calculator.c` using **Keil µVision** → generates `.hex` file
 3. Load the `.hex` into the AT89C51 in Proteus
 4. Run simulation and interact via the on-screen keypad
