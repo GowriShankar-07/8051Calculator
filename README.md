@@ -1,13 +1,11 @@
-# 🧮 8051-Based Scientific Calculator
+# 8051-Based Scientific Calculator
 
 A fully functional scientific calculator built on the **8051 microcontroller (AT89C51)**, featuring arithmetic operations, trigonometric functions, and exponentiation — all implemented in Embedded C with a 4×4 matrix keypad and 16×2 LCD interface.
 
-> 📌 Mini Project — Microprocessors and Microcontrollers: Fundamentals and Practices (UEE2601)  
-> SSN College of Engineering, Department of Electrical & Electronics Engineering | Sem VI, 2025–26
 
 ---
 
-## 📸 Hardware Demo
+## Hardware Demo
 
 ![8051 Calculator Hardware](assets/hardware.jpg)
 
@@ -15,9 +13,9 @@ A fully functional scientific calculator built on the **8051 microcontroller (AT
 
 ---
 
-## ✨ Features
+## Features
 
-### 🔢 Arithmetic Mode (`A` key → then 1/2/3/4)
+### Arithmetic Mode (`A` key → then 1/2/3/4)
 | Key Combo | Operation |
 |---|---|
 | A → 1 | Addition (+) |
@@ -25,7 +23,7 @@ A fully functional scientific calculator built on the **8051 microcontroller (AT
 | A → 3 | Multiplication (×) |
 | A → 4 | Division (÷) |
 
-### 📐 Trigonometric Mode (`D` key → then 1/2/3/4)
+### Trigonometric Mode (`D` key → then 1/2/3/4)
 | Key Combo | Operation |
 |---|---|
 | D → 1 | sin(x) |
@@ -35,7 +33,7 @@ A fully functional scientific calculator built on the **8051 microcontroller (AT
 
 > Trig functions use a **precomputed sine LUT (0°–90°)** with quadrant symmetry and fixed-point arithmetic — no floating-point needed!
 
-### ⚡ Other Functions
+### Other Functions
 | Key | Function |
 |---|---|
 | `*` | Exponentiation (x^y) |
@@ -43,14 +41,14 @@ A fully functional scientific calculator built on the **8051 microcontroller (AT
 | `B` | Backspace (delete last digit) |
 | `C` | Clear all (full reset) |
 
-### 🛡️ Edge Case Handling
+### Edge Case Handling
 - Division by zero → displays `ERROR`
-- Undefined trig results (tan 90°, cot 0°) → displays `UNDEFINED`
+- Undefined trig results (tan 90°, cot 0°) → displays `INF`
 - Continuous calculation: result of one operation becomes first operand of the next
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 ├── src/
@@ -68,19 +66,19 @@ A fully functional scientific calculator built on the **8051 microcontroller (AT
 
 ---
 
-## 🧠 System Architecture
+## System Architecture
 
 ```
-                        ┌─────────────────────────────────┐
+                        ┌──────────────────────────────────┐
                         │      8051 (AT89C51)              │
                         │                                  │
-  4×4 Matrix    ───────▶│  PORT 0   STATE MACHINE          │
+  4×4 Matrix    ──────▶│  PORT 0   STATE MACHINE          │
   Keypad (P0)           │           ├── Arithmetic Mode    │
                         │           ├── Trig Mode          │
                         │           └── Normal Mode        │
                         │                                  │
-  16×2 LCD     ◀───────│  PORT 1 (Data) + PORT 3 (Ctrl)  │
-                        └─────────────────────────────────┘
+  16×2 LCD     ◀───────│  PORT 1 (Data) + PORT 3 (Ctrl)   │
+                        └──────────────────────────────────┘
 ```
 
 ### Key Modules
@@ -98,26 +96,27 @@ A fully functional scientific calculator built on the **8051 microcontroller (AT
 - `display_number()` — integer rendering with sign support
 - `display_trig()` — fixed-point decimal formatting (x.xxxx)
 
-**BCD / Arithmetic Engine**
+**Arithmetic Mode**
 - State machine tracks: `num1`, `num2`, `op`, `mode`, `second` flag
 - Result chains into `num1` for continuous calculations
 
-**Trigonometric Engine**
+**Trigonometric Mode**
 - 91-entry `sin_table[]` stored in code memory (ROM)
 - `get_sin()` — full 360° coverage via quadrant symmetry
 - `get_cos()` — derived as `sin(90° − x)`
 - `get_tan()` / `get_cot()` — computed using scaled integer division
 
-**Power Engine**
+**Exponent mode**
 - `power(base, exp)` — iterative multiplication, overflow-safe
 
 ---
 
-## 🔌 Pin Mapping
+## Pin Mapping
 
 | Port | Pin(s) | Connected To |
 |---|---|---|
-| P0 | P0.0–P0.7 | 4×4 Keypad (rows + cols) |
+| P0 | P0.0–P0.3 | 4×4 Keypad rows |
+| P0 | P0.4–P0.7 | 4×4 Keypad columns |
 | P1 | P1.0–P1.7 | LCD Data Bus (D0–D7) |
 | P3 | P3.5 | LCD RS |
 | P3 | P3.6 | LCD RW |
@@ -125,7 +124,7 @@ A fully functional scientific calculator built on the **8051 microcontroller (AT
 
 ---
 
-## 🔬 Proteus Simulation
+## Proteus Simulation
 
 The full circuit was designed and verified in **Proteus Design Suite** before hardware implementation.
 
@@ -138,21 +137,21 @@ The simulation includes:
 - 10kΩ pull-up resistors on keypad lines
 - Power supply decoupling
 
+> KEYPAD-SMALLCALC didn't work properly in the simulation. So I created a matrix of push buttons to mimic the keypad myself.
 ---
 
-## 🛠️ Components
+## Components
 
-| Component | Specification | Cost |
-|---|---|---|
-| Microcontroller | AT89C51 (8051) | Lab provided |
-| Keypad | 4×4 Matrix, 16 keys | Rs. 100 |
-| Display | 16×2 LCD (HD44780) | Lab kit |
-| Pull-up Resistors | 10kΩ | Rs. 5 |
-| **Total** | | **Rs. 105** |
+| Component | Specification |
+|---|---|
+| Microcontroller | AT89C51 (8051) |
+| Keypad | 4×4 Matrix, 16 keys |
+| Display | 16×2 LCD (HD44780) |
+| Pull-up Resistors | 10kΩ |
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
 ### Simulation (Proteus)
 1. Open `simulation/calculator.pdsprj` in Proteus Design Suite
@@ -180,7 +179,7 @@ The simulation includes:
 
 ---
 
-## 💡 Key Concepts Demonstrated
+## Key Concepts Demonstrated
 
 - **Embedded C** programming for 8051 architecture
 - **Matrix keypad scanning** with debounce
@@ -192,7 +191,7 @@ The simulation includes:
 
 ---
 
-## 📚 References
+## References
 
 1. [Keypad Interfacing with 8051 (AT89S52)](https://circuitdigest.com/microcontroller-projects/keypad-interfacing-with-8051-microcontroller)
 2. [LCD 16×2: Pin Configuration and Working](https://www.elprocus.com/lcd-16x2-pin-configuration-and-its-working/)
@@ -200,14 +199,3 @@ The simulation includes:
 4. Mazidi, M.A., *The 8051 Microcontroller and Embedded Systems*, Pearson
 
 ---
-
-## 👥 Team
-
-| Name | Register No. |
-|---|---|
-| Akshaya V.V | 3122233001005 |
-| Gayathri M | 3122233001029 |
-| Giridharan B | 3122233001030 |
-| Gowri Shankara Narayanan A | 3122233001034 |
-
-> SSN College of Engineering — EEE Dept. | UEE2601 | Semester VI
