@@ -8,7 +8,7 @@ A fully functional scientific calculator built on the **8051 microcontroller (AT
 
 ## Hardware Demo
 
-![8051 Calculator Hardware](Hardware_calc.jpg)
+![8051 Calculator Hardware](Hardware_calc51.jpg)
 
 
 *The working calculator on a Microcontroller Trainer Kit with 4×4 keypad and 16×2 LCD*
