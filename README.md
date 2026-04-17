@@ -2,13 +2,14 @@
 
 A fully functional scientific calculator built on the **8051 microcontroller (AT89C51)**, featuring arithmetic operations, trigonometric functions, and exponentiation — all implemented in Embedded C with a 4×4 matrix keypad and 16×2 LCD interface.
 
+[Youtube link](https://youtu.be/oUOGsNmhVVI)
+
 ---
 
 ## Hardware Demo
 
-![8051 Calculator Hardware](hardware.jpg)
+![8051 Calculator Hardware](Hardware_calc.jpg)
 
-[Youtube link](https://youtu.be/oUOGsNmhVVI)
 
 *The working calculator on a Microcontroller Trainer Kit with 4×4 keypad and 16×2 LCD*
 
@@ -120,7 +121,7 @@ The simulation includes:
 - 10kΩ pull-up resistors on keypad lines
 - Power supply decoupling
 
-> KEYPAD-SMALLCALC didn't work properly in the simulation. So I created a matrix of push buttons to mimic the keypad myself.
+> KEYPAD-SMALLCALC didn't work properly in the simulation. So I created a matrix of push buttons with pullups to mimic the keypad myself.
 ---
 
 ## Components
@@ -144,7 +145,7 @@ The simulation includes:
 
 ### Hardware
 1. Compile with Keil µVision targeting 8051 / AT89C51
-2. Flash the `.hex` to the AT89C51 using a programmer (e.g., USB-ASP + Flash Magic)
+2. Flash the `.hex` to the AT89C51 using a programmer (e.g., Nuvoton, flash)
 3. Wire up per the pin mapping table above
 4. Power on — LCD initializes and waits for keypad input
 
